@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -5,6 +6,7 @@ const apiai = require('apiai');
 const apiaiApp = apiai('8e19b5f4bcee4ca484320e31dfdfebf9');
 const FaceBookAccess_Token = 'EAAHA063dws8BAOiWEKN7cAYpncugnKl3wF91HWDtZBv54ZAKmKHi9nGvxtYRrmtL7ZASKxWA8BfFaMpxEtWHDXqQYciKZCPpZAaR8q3Gz1B4VTs6VStDNIrZA4p1hHFcZBSZA7DuRZA30d1SyiUtqYCBSMYDsLgWbS7UE7xGfDZAZBqSFpNOGSspdEI';
 var request = require('request');
+const fbUrl = 'https://graph.facebook.com/v2.6/';
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -28,5 +30,7 @@ app.get('/webhook', (request, response) => {
 
 app.post('/webhook', (request, response) => {
     // session.send(req.body.object);
-    session.send("You said: %s", session.message.text);
+    // session.send("You said: %s", request.body.result);
+    fs.writeFileSync("./app.json", JSON.stringify(request.body.result),'utf-8');
+
 });
