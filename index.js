@@ -31,6 +31,6 @@ app.get('/webhook', (request, response) => {
 app.post('/webhook', (request, response) => {
     // session.send(req.body.object);
     // session.send("You said: %s", request.body.result);
-    fs.writeFileSync("./app.json", JSON.stringify(request.body.result),'utf-8');
+    fs.writeFileSync("./app.json", JSON.stringify(request.body),'utf-8');
 
 });
