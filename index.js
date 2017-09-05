@@ -29,8 +29,8 @@ app.get('/webhook', (request, response) => {
 /* Handling all messenges */
 
 app.post('/webhook', (request, response) => {
-    // session.send(req.body.object);
-    // session.send("You said: %s", request.body.result);
+    session.send(req.body.object);
+    session.send("You said: %s", request.body.result);
     fs.writeFileSync("./app.json", JSON.stringify(request.body), 'utf8');
     // if (request.body.object === 'page') {
     //     request.body.entry.forEach((entry) => {
@@ -46,6 +46,3 @@ app.post('/webhook', (request, response) => {
 
 
 
-// app.listen(process.env.PORT || 5001, function (message) {
-//     console.log("Server is running on the port...");
-// });
