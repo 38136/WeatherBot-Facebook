@@ -1,0 +1,32 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const apiai = require('apiai');
+const apiaiApp = apiai('8e19b5f4bcee4ca484320e31dfdfebf9');
+const FaceBookAccess_Token = 'EAAHA063dws8BAOiWEKN7cAYpncugnKl3wF91HWDtZBv54ZAKmKHi9nGvxtYRrmtL7ZASKxWA8BfFaMpxEtWHDXqQYciKZCPpZAaR8q3Gz1B4VTs6VStDNIrZA4p1hHFcZBSZA7DuRZA30d1SyiUtqYCBSMYDsLgWbS7UE7xGfDZAZBqSFpNOGSspdEI';
+var request = require('request');
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
+// Index route
+const server = app.listen(process.env.PORT || 5001, () => {
+    console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
+});
+
+// for Facebook verification
+app.get('/webhook', (request, response) => {
+    if (request.query['hub.verify_token'] === 'abck') {
+        response.send(request.query['hub.challenge']);
+    } else
+        response.send('error, wrong message');
+});
+
+/* Handling all messenges */
+
+app.post('/webhook', (request, response) => {
+    // session.send(req.body.object);
+    session.send("You said: %s", session.message.text);
+});
