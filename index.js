@@ -32,15 +32,20 @@ app.post('/webhook', (request, response) => {
     // session.send(req.body.object);
     // session.send("You said: %s", request.body.result);
     fs.writeFileSync("./app.json", JSON.stringify(request.body), 'utf8');
-
+    // if (request.body.object === 'page') {
+    //     request.body.entry.forEach((entry) => {
+    //         entry.messaging.forEach((event) => {
+    //             if (event.message && event.message.text) {
+    //                 sendMessage(event);
+    //             }
+    //         });
+    //     });
+    //     response.send(200).end();
+    // }
 });
 
-app.get("/getdata/", function (req, res) {
-    fs.readFile("./app.json", 'utf-8', function (err, data) {
-        res.json(data);
-    });
 
-});
+
 app.listen(process.env.PORT || 5001, function (message) {
     console.log("Server is running on the port...");
 })
